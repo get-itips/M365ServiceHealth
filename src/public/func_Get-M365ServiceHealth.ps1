@@ -7,6 +7,15 @@ Function Get-M365ServiceHealth {
 		Process { 
             $apiUrl = 'https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews'
             $Data = Invoke-RestMethod -Headers @{Authorization = "Bearer $access_token"} -Uri $apiUrl -Method Get
-            return $Data.value
+			$services = @()
+			foreach ($entry in $data.value){
+				$obj = New-Object -TypeName PSObject
+				$obj | Add-Member -MemberType NoteProperty -Name Service -value $entry.service
+				$obj | Add-Member -MemberType NoteProperty -Name Status -value $entry.Status
+				
+				$services+=$obj
+				
+			}
+			return $services
 		} 
 	}
