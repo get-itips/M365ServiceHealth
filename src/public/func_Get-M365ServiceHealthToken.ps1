@@ -13,8 +13,7 @@ Function Get-M365ServiceHealthToken {
                 Client_Id     = $clientId  
                 Client_Secret = $clientSecret  
                 }
-                #restoringService should be blue
-                #serviceOperational should be green
+
                   
 				$graphTokenResponse = Invoke-RestMethod -Uri "https://login.microsoftonline.com/$tenantName/oauth2/v2.0/token" -Method POST -Body $tokenBody
                 return $graphTokenResponse.access_token

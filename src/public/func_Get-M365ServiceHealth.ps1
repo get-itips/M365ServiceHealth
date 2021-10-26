@@ -35,7 +35,7 @@ Function Get-M365ServiceHealth {
 						{
 							'restoringService' { $color="96";break}
 							'serviceOperational' {$color="92"; break}
-							'serviceDegradation' {$color="27"; break}
+							'serviceDegradation' {$color="41"; break}
 							default { $color = "0" }
 						}
 						$e = [char]27
@@ -44,7 +44,7 @@ Function Get-M365ServiceHealth {
 				}
 				$now=Get-Date
 				Write-Host "Last updated $now"
-				$now.AddSeconds($refresh)
+				$now=$now.AddSeconds($refresh)
 				Write-Host "Refreshing at $now"
 				Start-Sleep -Seconds $Refresh
 				Clear-Host
