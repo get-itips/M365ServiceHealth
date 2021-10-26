@@ -1,8 +1,8 @@
 Function Get-M365ServiceHealth { 
 		[CmdletBinding()]
 		Param( 
-                [Parameter(Position = 0, Mandatory = $true)][String]$Access_Token
-				[Parameter(Position = 0, Mandatory = $false)][String]$Refresh
+                [Parameter(Position = 0, Mandatory = $true)][String]$Access_Token,
+				[Parameter(Position = 0, Mandatory = $false)][String]$Refresh = 60
 		) 
 		Process { 
             $apiUrl = 'https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews'
@@ -35,6 +35,8 @@ Function Get-M365ServiceHealth {
 				}
 				$now=Get-Date
 				Write-Host "Last updated $now"
+				$now.AddSeconds($refresh)
+				Write-Host "Refreshing at $now"
 				Start-Sleep -Seconds $Refresh
 				Clear-Host
 			}	

@@ -10,6 +10,19 @@ The module is pretty simple, so far you can find:
 - Get-M365ServiceHealth
 - Get-M365ServiceHealthToken
 
+## Requirements
+
+The module requires an application registered in AAD.
+The application needs to have this permission:
+
+- ServiceHealth.Read.All
+
+## How to use
+
+Get a token using the ´Get-M365ServiceHealthToken -ClientId XXXX -ClientSecret XXXX -TenantName XXXX´
+
+Provide that token to 
+
 ## Future
 I plan in adding more cmdlets based on the [service communications API of Microsoft Graph](https://docs.microsoft.com/graph/api/resources/service-communications-api-overview).
 
