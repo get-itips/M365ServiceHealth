@@ -28,6 +28,9 @@ Get-M365ServiceHealth -ClientId <String> -ClientSecret <String> -TenantName <Str
 By default it will refresh every 60 seconds but you can specify using -Refresh parameter.
 
 ## Future
-I plan in adding more cmdlets based on the [service communications API of Microsoft Graph](https://docs.microsoft.com/graph/api/resources/service-communications-api-overview).
+
+- I plan in adding more cmdlets based on the [service communications API of Microsoft Graph](https://docs.microsoft.com/graph/api/resources/service-communications-api-overview).
+- Docs
+- Better error handling
 
 Contributions are very well welcomed!
