@@ -1,10 +1,18 @@
 Function Get-M365ServiceHealth { 
 		[CmdletBinding()]
 		Param( 
-                [Parameter(Position = 0, Mandatory = $true)][String]$Access_Token,
-				[Parameter(Position = 0, Mandatory = $false)][String]$Refresh = 60
+				[Parameter(Position = 0, Mandatory = $false)][String]$Refresh = 60,
+				[Parameter(Position = 0, Mandatory = $true)][String]$ClientId, 
+                [Parameter(Position = 0, Mandatory = $true)][String]$ClientSecret,
+                [Parameter(Position = 0, Mandatory = $true)][String]$TenantName
 		) 
-		Process { 
+		Process {
+
+			#Request token
+			$access_token=Get-M365ServiceHealthToken -ClientId $clientId -clientSecret $clientSecret -TenantName $tenantName
+			#End Request token
+			$processBeginTime=Get-Date
+			
             $apiUrl = 'https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews'
             while($true){
 				$Data = Invoke-RestMethod -Headers @{Authorization = "Bearer $access_token"} -Uri $apiUrl -Method Get
@@ -27,6 +35,7 @@ Function Get-M365ServiceHealth {
 						{
 							'restoringService' { $color="96";break}
 							'serviceOperational' {$color="92"; break}
+							'serviceDegradation' {$color="27"; break}
 							default { $color = "0" }
 						}
 						$e = [char]27
@@ -39,6 +48,9 @@ Function Get-M365ServiceHealth {
 				Write-Host "Refreshing at $now"
 				Start-Sleep -Seconds $Refresh
 				Clear-Host
+				if(((get-date)-$processBeginTime).TotalMinutes -gt 55){
+					$access_token=Get-M365ServiceHealthToken -ClientId $clientId -clientSecret $clientSecret -TenantName $tenantName
+					}
 			}	
 
 		} 
