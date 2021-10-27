@@ -7,6 +7,7 @@ Started to build this module for educational purposes and also because I am a Mi
 ## Cmdlets
 The module is pretty simple, so far you can find:
 
+- Initialize-M365ServiceHealth
 - Get-M365ServiceHealth
 - Get-M365ServiceHealthIssues
 - Get-M365ServiceHealthToken
@@ -48,7 +49,7 @@ By default it will refresh every 60 seconds but you can specify using -Refresh p
 - Better error handling
 - Better token handling
 
-Contributions are very well welcomed!
+**Contributions** are very well welcomed!
 
 ## Acknowledgments
 
