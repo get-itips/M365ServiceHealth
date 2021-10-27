@@ -19,11 +19,19 @@ The application needs to have this permission:
 
 ## How to use
 
+To get an overview of Microsoft 365 Services health:
+
 `Get-M365ServiceHealth` Syntax:
 
 ```powershell
 Get-M365ServiceHealth -ClientId <String> -ClientSecret <String> -TenantName <String> [-Refresh <UInt32>]
 ```
+To get a list of unresolved issues per service:
+
+```powershell
+Get-M365ServiceHealthIssues -ServiceName <String> -ClientId <String> -ClientSecret <String> -TenantName <String>
+```
+
 
 By default it will refresh every 60 seconds but you can specify using -Refresh parameter.
 
