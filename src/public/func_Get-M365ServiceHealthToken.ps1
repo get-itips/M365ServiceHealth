@@ -1,9 +1,7 @@
 Function Get-M365ServiceHealthToken { 
 		[CmdletBinding()]
 		Param( 
-				[Parameter(Position = 0, Mandatory = $true)][String]$ClientId, 
-                [Parameter(Position = 0, Mandatory = $true)][String]$ClientSecret,
-                [Parameter(Position = 0, Mandatory = $true)][String]$TenantName
+
 		) 
 		Process {
 			if($Global:M365ServiceHealthClientSecret -eq $null -or $Global:M365ServiceHealthClientId -eq $Null -or $Global:M365ServiceHealthTenantName -eq $null ){

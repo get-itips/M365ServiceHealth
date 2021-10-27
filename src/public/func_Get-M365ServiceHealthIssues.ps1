@@ -5,6 +5,12 @@ Function Get-M365ServiceHealthIssues {
 		) 
 		Process {
             
+            if($Global:M365ServiceHealthClientSecret -eq $null -or $Global:M365ServiceHealthClientId -eq $Null -or $Global:M365ServiceHealthTenantName -eq $null ){
+			
+			Write-Host "Please run Initialize-M365ServiceHealth, Tenant parameters not set."
+			break
+			}
+
             #Request token
 			$access_token=Get-M365ServiceHealthToken -ClientId $Global:M365ServiceHealthClientId -clientSecret $Global:M365ServiceHealthClientSecret -TenantName $Global:M365ServiceHealthTenantName
 			#End Request token
