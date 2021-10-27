@@ -7,7 +7,7 @@
 	CompanyName 		= 'Unknown' 
 	Copyright 		= '(c) Andrés Gorzelany. All rights reserved.' 
 	Description 		= 'M365ServiceHealth works by providing different cmdlets to retrieve Microsoft 365 Service status by querying the official Graph service communications API'
-	FunctionsToExport 	= @('Get-M365ServiceHealth','Get-M365ServiceHealthIssues','Get-M365ServiceHealthToken') 
+	FunctionsToExport 	= @('Get-M365ServiceHealth','Get-M365ServiceHealthIssues','Get-M365ServiceHealthToken','Initialize-M365ServiceHealth') 
 	CmdletsToExport 	= @() 
 	VariablesToExport 	= @() 
 	AliasesToExport 	= @() 

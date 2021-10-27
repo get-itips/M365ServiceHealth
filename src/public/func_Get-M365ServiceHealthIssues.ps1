@@ -1,15 +1,12 @@
 Function Get-M365ServiceHealthIssues { 
 		[CmdletBinding()]
 		Param( 
-				[Parameter(Position = 0, Mandatory = $true)][String]$ClientId, 
-                [Parameter(Position = 0, Mandatory = $true)][String]$ClientSecret,
-                [Parameter(Position = 0, Mandatory = $true)][String]$TenantName,
                 [Parameter(Position = 0, Mandatory = $true)][String]$ServiceName
 		) 
 		Process {
             
             #Request token
-			$access_token=Get-M365ServiceHealthToken -ClientId $clientId -clientSecret $clientSecret -TenantName $tenantName
+			$access_token=Get-M365ServiceHealthToken -ClientId $Global:M365ServiceHealthClientId -clientSecret $Global:M365ServiceHealthClientSecret -TenantName $Global:M365ServiceHealthTenantName
 			#End Request token
 
             $apiUrlPart1 = 'https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews/'

@@ -1,15 +1,13 @@
 Function Get-M365ServiceHealth { 
 		[CmdletBinding()]
 		Param( 
-				[Parameter(Position = 0, Mandatory = $false)][String]$Refresh = 60,
-				[Parameter(Position = 0, Mandatory = $true)][String]$ClientId, 
-                [Parameter(Position = 0, Mandatory = $true)][String]$ClientSecret,
-                [Parameter(Position = 0, Mandatory = $true)][String]$TenantName
+				[Parameter(Position = 0, Mandatory = $false)][String]$Refresh = 60
+
 		) 
 		Process {
 
 			#Request token
-			$access_token=Get-M365ServiceHealthToken -ClientId $clientId -clientSecret $clientSecret -TenantName $tenantName
+			$access_token=Get-M365ServiceHealthToken -ClientId $Global:M365ServiceHealthClientId -clientSecret $Global:M365ServiceHealthClientSecret -TenantName $Global:M365ServiceHealthTenantName
 			#End Request token
 			$processBeginTime=Get-Date
 			
@@ -49,7 +47,7 @@ Function Get-M365ServiceHealth {
 				Start-Sleep -Seconds $Refresh
 				Clear-Host
 				if(((get-date)-$processBeginTime).TotalMinutes -gt 55){
-					$access_token=Get-M365ServiceHealthToken -ClientId $clientId -clientSecret $clientSecret -TenantName $tenantName
+					$access_token=Get-M365ServiceHealthToken -ClientId $Global:M365ServiceHealthClientId -clientSecret $Global:M365ServiceHealthClientSecret -TenantName $Global:M365ServiceHealthTenantName
 					}
 			}	
 
