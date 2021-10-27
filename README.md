@@ -8,6 +8,7 @@ Started to build this module for educational purposes and also because I am a Mi
 The module is pretty simple, so far you can find:
 
 - Get-M365ServiceHealth
+- Get-M365ServiceHealthIssues
 - Get-M365ServiceHealthToken
 
 ## Requirements
