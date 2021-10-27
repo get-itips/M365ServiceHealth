@@ -44,3 +44,7 @@ By default it will refresh every 60 seconds but you can specify using -Refresh p
 - Better token handling
 
 Contributions are very well welcomed!
+
+## Acknowledgments
+
+Thanks to Adam Bertram for his "Building Your First PowerShell Module" article.
