@@ -1,7 +1,8 @@
 @{
 	RootModule 		= 'M365ServiceHealth.psm1' 
 	ModuleVersion 		= '0.0.1' 
-	CompatiblePSEditions 	= 'Desktop', 'Core' 
+	CompatiblePSEditions 	= 'Desktop', 'Core'
+	PowerShellVersion = '5.1' 
 	GUID 			= '605fc8c1-0d1f-4749-ad3e-1ed55d071291' 
 	Author 			= 'Andrés Gorzelany @andresgorzelany' 
 	CompanyName 		= 'Unknown' 
