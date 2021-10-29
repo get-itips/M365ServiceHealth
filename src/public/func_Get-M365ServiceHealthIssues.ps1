@@ -12,7 +12,7 @@ Function Get-M365ServiceHealthIssues {
 			}
 
             #Request token
-			$access_token=Get-M365ServiceHealthToken -ClientId $Global:M365ServiceHealthClientId -clientSecret $Global:M365ServiceHealthClientSecret -TenantName $Global:M365ServiceHealthTenantName
+			$access_token=Get-M365ServiceHealthToken
 			#End Request token
 
             $apiUrlPart1 = 'https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews/'

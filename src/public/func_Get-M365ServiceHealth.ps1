@@ -13,7 +13,7 @@ Function Get-M365ServiceHealth {
 			}
 
 			#Request token
-			$access_token=Get-M365ServiceHealthToken -ClientId $Global:M365ServiceHealthClientId -clientSecret $Global:M365ServiceHealthClientSecret -TenantName $Global:M365ServiceHealthTenantName
+			$access_token=Get-M365ServiceHealthToken
 			#End Request token
 			$processBeginTime=Get-Date
 			
