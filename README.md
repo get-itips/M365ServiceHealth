@@ -19,6 +19,12 @@ The application needs to have this permission:
 
 - ServiceHealth.Read.All
 
+## How to install
+
+```powershell
+Install-Module -Name M365ServiceHealth
+```
+
 ## How to use
 
 First of all, run 
