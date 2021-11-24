@@ -22,4 +22,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           FROM_BRANCH: "dev"
-          TO_BRANCH: "main"
+          TO_BRANCH: "live"
