@@ -30,7 +30,9 @@ Install-Module -Name M365ServiceHealth
 First of all, run 
 
 ```powershell
-Initialize-M365ServiceHealth -ClientId <String> -ClientSecret <String> -TenantName <String>
+Connect-M365ServiceHealth 
+Connect-M365ServiceHealth -ApplicationID <String> -ClientSecret <String> -TenantID <String>
+Connect-M365ServiceHealth -ApplicationID <String> -CertificateThumbPrint <String> -TenantID <String>
 ```
 
 To set the required Tenant parameters for the rest of the cmdlets.
