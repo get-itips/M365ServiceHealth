@@ -64,15 +64,17 @@ I guess we should use similar Parameters
 	Process {
 
 
-		Write-Host "DEBUG: TenantID: $TenantID"
-		Write-Host "DEBUG: ApplicationID: $ApplicationID"
-		Write-Host "DEBUG: ClientSecret: $ClientSecret"
-		Write-Host "DEBUG: CertificateThumbprint: $CertificateThumbprint"
+		#Write-Host "DEBUG: TenantID: $TenantID"
+		#Write-Host "DEBUG: ApplicationID: $ApplicationID"
+		#Write-Host "DEBUG: ClientSecret: $ClientSecret"
+		#Write-Host "DEBUG: CertificateThumbprint: $CertificateThumbprint"
 
 		#Scope is always Microsoft Graph
 		$Scope = "https://graph.microsoft.com/.default"
 
-		If ($TenantId -eq $NULL -and $ApplicationId -eq $NULL -AND $ClientSecret -eq $NULL -and $CertificateThumbprint -eq $NULL)
+		<#
+		#If ($TenantId -eq $NULL -and $ApplicationId -eq $NULL -AND $ClientSecret -eq $NULL -and $CertificateThumbprint -eq $NULL)
+		If ($TenantId -eq "" -and $ApplicationId -eq "" -AND $ClientSecret -eq "" -and $CertificateThumbprint -eq "")
 		{
 			###############################################################################
 			#Interactive (authorization code flow)
@@ -90,46 +92,50 @@ I guess we should use similar Parameters
 			$Global:AccessToken
 
 		} 
+		#>
 
-		If ($TenantId -ne $NULL -and $ApplicationId -ne $NULL -and $ClientSecret -ne $NULL )
+		If ($TenantId -ne "" -and $ApplicationId -ne "" -and $ClientSecret -ne "" )
 		{
 			###############################################################################
 			#Client Secret
 			###############################################################################
 			Write-Host "DEBUG: SELECT > Client Secret"
 			$ClientSecretSecure = ConvertTo-SecureString $ClientSecret -AsPlainText -Force
+			
 			$connectionDetails = @{
-				'TenantId'     = $TenantId
-				'ClientId'     = $ApplicationId
-				'ClientSecret' = $ClientSecretSecure
+				'TenantId'		= $TenantId
+				'ClientId'		= $ApplicationId
+				'ClientSecret'	= $ClientSecretSecure
+				'Scope'			= $Scope
 			}
 			$Token = Get-MsalToken @connectionDetails
 			$Global:AccessToken = $Token.AccessToken
 			#DEBUG
-			$Global:AccessToken
+			#$Global:AccessToken
 		}
 
-		If ($TenantId -ne $NULL -and $ApplicationId -ne $NULL -and $CertificateThumbprint -ne $NULL)
+
+		If ($TenantId -ne "" -and $ApplicationId -ne "" -and $CertificateThumbprint -ne "")
 		{
 			###############################################################################
 			#Certificate
 			###############################################################################
 			Write-Host "DEBUG: SELECT > Certificate"
+			
 			$ClientCertificate = Get-Item Cert:\CurrentUser\My\$CertificateThumbprint
 			$connectionDetails = @{
 				'TenantId'          = $TenantId
 				'ClientId'          = $ApplicationId
 				'ClientCertificate' = $ClientCertificate
-			}
-			$Token = Get-MsalToken @connectionDetails
+				'Scope'				= $Scope
+				}	
+			$Token = Get-MsalToken @connectionDetails			
 			$Global:AccessToken = $Token.AccessToken
 			#DEBUG
-			$Global:AccessToken
+			#$Global:AccessToken
 		}
 	} 
 } 
-
-
 
 
 
@@ -149,6 +155,7 @@ Function Disconnect-M365ServiceHealth {
 #>
 
 	#Clear Tokens 
+	Write-Host "Clear Access Token and TokenCache"
 	Clear-MsalTokenCache
 
 	#Clear Global Variable
@@ -252,9 +259,9 @@ Function Get-M365ServiceHealth {
 			Write-Host "Refreshing at $now"
 			Start-Sleep -Seconds $Refresh
 			Clear-Host
-			if(((get-date)-$processBeginTime).TotalMinutes -gt 55){
-				$access_token=Get-M365ServiceHealthToken -ClientId $Global:M365ServiceHealthClientId -clientSecret $Global:M365ServiceHealthClientSecret -TenantName $Global:M365ServiceHealthTenantName
-				}
+			#if(((get-date)-$processBeginTime).TotalMinutes -gt 55){
+			#	$access_token=Get-M365ServiceHealthToken -ClientId $Global:M365ServiceHealthClientId -clientSecret $Global:M365ServiceHealthClientSecret -TenantName $Global:M365ServiceHealthTenantName
+			#	}
 		}	
 
 	} 
@@ -266,4 +273,4 @@ Function Get-M365ServiceHealth {
 #################################################################################
 Import-Module MSAL.PS
 #$Global:$AccessToken=$null
-New-Alias -Name "Initialize-M365ServiceHealth" -Value "Connect-M365ServiceHealth"
+#New-Alias -Name "Initialize-M365ServiceHealth" -Value "Connect-M365ServiceHealth" -Scope "Script" -PassThru
